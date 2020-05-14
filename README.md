@@ -3,6 +3,7 @@ KnowledgeSpace is a open source project for everyone. Every member can create ne
 For each KB, user can vote it and comment to below KB.
 
 # Migration
+- Open Package Manager Console
 - Add-Migration Initial -OutputDir Data/Migrations
 
 # Technology Stack
@@ -87,6 +88,7 @@ For each KB, user can vote it and comment to below KB.
 </configuration>
 ```
 11. Check url in setting
+12. Generate script migration: Script-Migration
 
 # Reference
 1. https://jakeydocs.readthedocs.io/en/latest/client-side/using-gulp.html
