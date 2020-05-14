@@ -5,7 +5,7 @@ For each KB, user can vote it and comment to below KB.
 # Migration
 - Add-Migration Initial -OutputDir Data/Migrations
 
-#Technology Stack
+# Technology Stack
 1. ASP.NET Core 3.1
 2. Angular 8
 3. Identity Server 4
