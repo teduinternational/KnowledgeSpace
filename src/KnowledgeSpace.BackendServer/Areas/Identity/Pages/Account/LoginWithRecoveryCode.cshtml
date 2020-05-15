@@ -7,8 +7,7 @@
 <h1>@ViewData["Title"]</h1>
 <hr />
 <p>
-    You have requested to log in with a recovery code. This login will not be remembered until you provide
-    an authenticator app code at log in or disable 2FA and log in again.
+    Bạn đã yêu cầu đăng nhập với mã bảo mật. Đăng nhập sẽ không được xác nhận cho đến khi bạn cung cấp mã bảo mật hoặc vô hiệu hóa tính năng 2FA và đăng nhập lại.
 </p>
 <div class="row">
     <div class="col-md-4">
@@ -19,7 +18,7 @@
                 <input asp-for="Input.RecoveryCode" class="form-control" autocomplete="off" />
                 <span asp-validation-for="Input.RecoveryCode" class="text-danger"></span>
             </div>
-            <button type="submit" class="btn btn-primary">Log in</button>
+            <button type="submit" class="btn btn-primary">Đăng nhập</button>
         </form>
     </div>
 </div>

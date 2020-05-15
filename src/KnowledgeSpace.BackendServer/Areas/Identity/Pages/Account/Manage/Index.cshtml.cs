@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-using KnowledgeSpace.BackendServer.Data.Entities;
+﻿using KnowledgeSpace.BackendServer.Data.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System;
+using System.ComponentModel.DataAnnotations;
+using System.Threading.Tasks;
 
 namespace KnowledgeSpace.BackendServer.Areas.Identity.Pages.Account.Manage
 {
@@ -23,6 +21,7 @@ namespace KnowledgeSpace.BackendServer.Areas.Identity.Pages.Account.Manage
             _signInManager = signInManager;
         }
 
+        [Display(Name = "Tài khoản")]
         public string Username { get; set; }
 
         [TempData]
@@ -34,7 +33,7 @@ namespace KnowledgeSpace.BackendServer.Areas.Identity.Pages.Account.Manage
         public class InputModel
         {
             [Phone]
-            [Display(Name = "Phone number")]
+            [Display(Name = "Số điện thoại")]
             public string PhoneNumber { get; set; }
         }
 
@@ -56,7 +55,7 @@ namespace KnowledgeSpace.BackendServer.Areas.Identity.Pages.Account.Manage
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
-                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+                return NotFound($"Không thể tìm thấy tài khoản với ID '{_userManager.GetUserId(User)}'.");
             }
 
             await LoadAsync(user);
@@ -68,7 +67,7 @@ namespace KnowledgeSpace.BackendServer.Areas.Identity.Pages.Account.Manage
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
-                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+                return NotFound($"Không thể tìm thấy tài khoản với ID '{_userManager.GetUserId(User)}'.");
             }
 
             if (!ModelState.IsValid)
@@ -89,7 +88,7 @@ namespace KnowledgeSpace.BackendServer.Areas.Identity.Pages.Account.Manage
             }
 
             await _signInManager.RefreshSignInAsync(user);
-            StatusMessage = "Your profile has been updated";
+            StatusMessage = "Cập nhật thành công";
             return RedirectToPage();
         }
     }

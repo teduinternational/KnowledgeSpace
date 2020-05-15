@@ -1,11 +1,11 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.Threading.Tasks;
-using KnowledgeSpace.BackendServer.Data.Entities;
+﻿using KnowledgeSpace.BackendServer.Data.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using System;
+using System.ComponentModel.DataAnnotations;
+using System.Threading.Tasks;
 
 namespace KnowledgeSpace.BackendServer.Areas.Identity.Pages.Account.Manage
 {
@@ -30,8 +30,9 @@ namespace KnowledgeSpace.BackendServer.Areas.Identity.Pages.Account.Manage
 
         public class InputModel
         {
-            [Required]
+            [Required(ErrorMessage = "{0} bắt buộc phải nhập")]
             [DataType(DataType.Password)]
+            [Display(Name = "Mật khẩu")]
             public string Password { get; set; }
         }
 
@@ -42,7 +43,7 @@ namespace KnowledgeSpace.BackendServer.Areas.Identity.Pages.Account.Manage
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
-                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+                return NotFound($"Không thể tìm thấy tài khoản với ID '{_userManager.GetUserId(User)}'.");
             }
 
             RequirePassword = await _userManager.HasPasswordAsync(user);
@@ -54,7 +55,7 @@ namespace KnowledgeSpace.BackendServer.Areas.Identity.Pages.Account.Manage
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
-                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+                return NotFound($"Không thể tìm thấy tài khoản với ID '{_userManager.GetUserId(User)}'.");
             }
 
             RequirePassword = await _userManager.HasPasswordAsync(user);
@@ -71,12 +72,12 @@ namespace KnowledgeSpace.BackendServer.Areas.Identity.Pages.Account.Manage
             var userId = await _userManager.GetUserIdAsync(user);
             if (!result.Succeeded)
             {
-                throw new InvalidOperationException($"Unexpected error occurred deleting user with ID '{userId}'.");
+                throw new InvalidOperationException($"Có lỗi xảy ra khi xóa user '{userId}'.");
             }
 
             await _signInManager.SignOutAsync();
 
-            _logger.LogInformation("User with ID '{UserId}' deleted themselves.", userId);
+            _logger.LogInformation("Người dùng với Id '{UserId}' đã được xóa.", userId);
 
             return Redirect("~/");
         }

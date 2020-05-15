@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using KnowledgeSpace.BackendServer.Data.Entities;
 using Microsoft.AspNetCore.Authorization;
-using KnowledgeSpace.BackendServer.Data.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using System;
+using System.ComponentModel.DataAnnotations;
+using System.Threading.Tasks;
 
 namespace KnowledgeSpace.BackendServer.Areas.Identity.Pages.Account
 {
@@ -33,13 +31,13 @@ namespace KnowledgeSpace.BackendServer.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
-            [StringLength(7, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [Required(ErrorMessage = "{0} bắt buộc phải nhập")]
+            [StringLength(7, ErrorMessage = "{0} phải có ít nhất {2} và nhiều nhất {1} ký tự.", MinimumLength = 6)]
             [DataType(DataType.Text)]
-            [Display(Name = "Authenticator code")]
+            [Display(Name = "Mã bảo mật")]
             public string TwoFactorCode { get; set; }
 
-            [Display(Name = "Remember this machine")]
+            [Display(Name = "Nhớ thiết bị này")]
             public bool RememberMachine { get; set; }
         }
 
@@ -50,7 +48,7 @@ namespace KnowledgeSpace.BackendServer.Areas.Identity.Pages.Account
 
             if (user == null)
             {
-                throw new InvalidOperationException($"Unable to load two-factor authentication user.");
+                throw new InvalidOperationException($"Không thể tìm thấy user.");
             }
 
             ReturnUrl = returnUrl;
@@ -71,7 +69,7 @@ namespace KnowledgeSpace.BackendServer.Areas.Identity.Pages.Account
             var user = await _signInManager.GetTwoFactorAuthenticationUserAsync();
             if (user == null)
             {
-                throw new InvalidOperationException($"Unable to load two-factor authentication user.");
+                throw new InvalidOperationException($"Không thể tìm thấy user.");
             }
 
             var authenticatorCode = Input.TwoFactorCode.Replace(" ", string.Empty).Replace("-", string.Empty);
@@ -91,7 +89,7 @@ namespace KnowledgeSpace.BackendServer.Areas.Identity.Pages.Account
             else
             {
                 _logger.LogWarning("Invalid authenticator code entered for user with ID '{UserId}'.", user.Id);
-                ModelState.AddModelError(string.Empty, "Invalid authenticator code.");
+                ModelState.AddModelError(string.Empty, "Mã bảo mật không đúng.");
                 return Page();
             }
         }

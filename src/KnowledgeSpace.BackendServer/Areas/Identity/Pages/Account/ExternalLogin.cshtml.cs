@@ -1,19 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Security.Claims;
-using System.Text;
-using System.Text.Encodings.Web;
-using System.Threading.Tasks;
+﻿using KnowledgeSpace.BackendServer.Data.Entities;
 using Microsoft.AspNetCore.Authorization;
-using KnowledgeSpace.BackendServer.Data.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using System.ComponentModel.DataAnnotations;
+using System.Security.Claims;
+using System.Text;
+using System.Text.Encodings.Web;
+using System.Threading.Tasks;
 
 namespace KnowledgeSpace.BackendServer.Areas.Identity.Pages.Account
 {
@@ -49,7 +46,7 @@ namespace KnowledgeSpace.BackendServer.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
+            [Required(ErrorMessage = "{0} bắt buộc phải nhập")]
             [EmailAddress]
             public string Email { get; set; }
         }
@@ -73,7 +70,7 @@ namespace KnowledgeSpace.BackendServer.Areas.Identity.Pages.Account
             if (remoteError != null)
             {
                 ErrorMessage = $"Error from external provider: {remoteError}";
-                return RedirectToPage("./Login", new {ReturnUrl = returnUrl });
+                return RedirectToPage("./Login", new { ReturnUrl = returnUrl });
             }
             var info = await _signInManager.GetExternalLoginInfoAsync();
             if (info == null)
@@ -83,7 +80,7 @@ namespace KnowledgeSpace.BackendServer.Areas.Identity.Pages.Account
             }
 
             // Sign in the user with this external login provider if the user already has a login.
-            var result = await _signInManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, isPersistent: false, bypassTwoFactor : true);
+            var result = await _signInManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, isPersistent: false, bypassTwoFactor: true);
             if (result.Succeeded)
             {
                 _logger.LogInformation("{Name} logged in with {LoginProvider} provider.", info.Principal.Identity.Name, info.LoginProvider);
@@ -116,7 +113,7 @@ namespace KnowledgeSpace.BackendServer.Areas.Identity.Pages.Account
             var info = await _signInManager.GetExternalLoginInfoAsync();
             if (info == null)
             {
-                ErrorMessage = "Error loading external login information during confirmation.";
+                ErrorMessage = "Có lỗi khi xác nhận đăng nhập.";
                 return RedirectToPage("./Login", new { ReturnUrl = returnUrl });
             }
 
@@ -147,8 +144,8 @@ namespace KnowledgeSpace.BackendServer.Areas.Identity.Pages.Account
                             values: new { area = "Identity", userId = userId, code = code },
                             protocol: Request.Scheme);
 
-                        await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                            $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                        await _emailSender.SendEmailAsync(Input.Email, "Xác nhận email",
+                            $"Xin mời xác nhận email bằng cách <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
                         return LocalRedirect(returnUrl);
                     }

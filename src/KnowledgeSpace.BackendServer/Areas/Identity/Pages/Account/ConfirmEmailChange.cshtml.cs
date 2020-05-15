@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using KnowledgeSpace.BackendServer.Data.Entities;
 using Microsoft.AspNetCore.Authorization;
-using KnowledgeSpace.BackendServer.Data.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace KnowledgeSpace.BackendServer.Areas.Identity.Pages.Account
 {
@@ -37,14 +34,14 @@ namespace KnowledgeSpace.BackendServer.Areas.Identity.Pages.Account
             var user = await _userManager.FindByIdAsync(userId);
             if (user == null)
             {
-                return NotFound($"Unable to load user with ID '{userId}'.");
+                return NotFound($"Không thể tìm thấy tài khoản với ID '{userId}'.");
             }
 
             code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(code));
             var result = await _userManager.ChangeEmailAsync(user, email, code);
             if (!result.Succeeded)
             {
-                StatusMessage = "Error changing email.";
+                StatusMessage = "Đổi email không thành công.";
                 return Page();
             }
 
@@ -53,12 +50,12 @@ namespace KnowledgeSpace.BackendServer.Areas.Identity.Pages.Account
             var setUserNameResult = await _userManager.SetUserNameAsync(user, email);
             if (!setUserNameResult.Succeeded)
             {
-                StatusMessage = "Error changing user name.";
+                StatusMessage = "Đổi email không tài khoản.";
                 return Page();
             }
 
             await _signInManager.RefreshSignInAsync(user);
-            StatusMessage = "Thank you for confirming your email change.";
+            StatusMessage = "Cảm ơn bạn đã xác nhận thay đổi email.";
             return Page();
         }
     }

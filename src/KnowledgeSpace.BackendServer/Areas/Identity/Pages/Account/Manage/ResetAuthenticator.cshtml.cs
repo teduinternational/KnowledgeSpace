@@ -1,20 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using KnowledgeSpace.BackendServer.Data.Entities;
+﻿using KnowledgeSpace.BackendServer.Data.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using System.Threading.Tasks;
 
 namespace KnowledgeSpace.BackendServer.Areas.Identity.Pages.Account.Manage
 {
     public class ResetAuthenticatorModel : PageModel
     {
-        UserManager<User> _userManager;
+        private UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
-        ILogger<ResetAuthenticatorModel> _logger;
+        private ILogger<ResetAuthenticatorModel> _logger;
 
         public ResetAuthenticatorModel(
             UserManager<User> userManager,
@@ -34,7 +31,7 @@ namespace KnowledgeSpace.BackendServer.Areas.Identity.Pages.Account.Manage
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
-                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+                return NotFound($"Không thể tìm thấy tài khoản với ID '{_userManager.GetUserId(User)}'.");
             }
 
             return Page();
@@ -45,7 +42,7 @@ namespace KnowledgeSpace.BackendServer.Areas.Identity.Pages.Account.Manage
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
-                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+                return NotFound($"Không thể tìm thấy tài khoản với ID '{_userManager.GetUserId(User)}'.");
             }
 
             await _userManager.SetTwoFactorEnabledAsync(user, false);
