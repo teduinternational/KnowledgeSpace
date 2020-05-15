@@ -1,12 +1,12 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using System.Text;
-using System.Threading.Tasks;
-using KnowledgeSpace.BackendServer.Data.Entities;
+﻿using KnowledgeSpace.BackendServer.Data.Entities;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
-using Microsoft.AspNetCore.Identity;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace KnowledgeSpace.BackendServer.Areas.Identity.Pages.Account
 {

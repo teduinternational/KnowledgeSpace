@@ -1,18 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using IdentityModel;
+using IdentityServer4.Events;
+using IdentityServer4.Extensions;
+using IdentityServer4.Services;
 using KnowledgeSpace.BackendServer.Data.Entities;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
-using IdentityServer4.Services;
-using IdentityServer4.Events;
-using IdentityServer4.Extensions;
-using Microsoft.AspNetCore.Authentication;
-using IdentityModel;
+using System;
+using System.Threading.Tasks;
 
 namespace KnowledgeSpace.BackendServer.Areas.Identity.Pages.Account
 {

@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using KnowledgeSpace.BackendServer.Data.Entities;
 using Microsoft.AspNetCore.Authorization;
-using KnowledgeSpace.BackendServer.Data.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using System;
+using System.ComponentModel.DataAnnotations;
+using System.Threading.Tasks;
 
 namespace KnowledgeSpace.BackendServer.Areas.Identity.Pages.Account
 {
@@ -32,7 +30,7 @@ namespace KnowledgeSpace.BackendServer.Areas.Identity.Pages.Account
         public class InputModel
         {
             [BindProperty]
-            [Required]
+            [Required(ErrorMessage = "{0} bắt buộc phải nhập")]
             [DataType(DataType.Text)]
             [Display(Name = "Recovery Code")]
             public string RecoveryCode { get; set; }
