@@ -44,13 +44,15 @@ namespace KnowledgeSpace.BackendServer.Areas.Identity.Pages.Account
         public class InputModel
         {
             [Required]
+            [Display(Name = "Tài khoản")]
             public string UserName { get; set; }
 
             [Required]
             [DataType(DataType.Password)]
+            [Display(Name = "Mật khẩu")]
             public string Password { get; set; }
 
-            [Display(Name = "Remember me?")]
+            [Display(Name = "Nhớ mật khẩu?")]
             public bool RememberMe { get; set; }
         }
 
@@ -96,7 +98,7 @@ namespace KnowledgeSpace.BackendServer.Areas.Identity.Pages.Account
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    ModelState.AddModelError(string.Empty, "Đăng nhập không đúng.");
                     return Page();
                 }
             }

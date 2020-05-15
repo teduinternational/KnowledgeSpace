@@ -1,7 +1,7 @@
 ﻿@page
 @model LogoutModel
 @{
-    ViewData["Title"] = "Log out";
+    ViewData["Title"] = "TEDU - Đăng xuất";
     Layout = null;
 }
 <!DOCTYPE html>
@@ -9,7 +9,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Logout - MyShop.Backend</title>
+    <title>Đăng xuất - TEDU</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
@@ -17,7 +17,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">MyShop.Backend</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">TEDU</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -25,10 +25,10 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Trang chủ</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Chính sách</a>
                         </li>
                     </ul>
                 </div>
@@ -41,12 +41,12 @@
             {
                 <div class="row">
                     <div class="col-sm-6">
-                        <p>Would you like to logout of IdentityServer?</p>
+                        <p>Bạn có muốn đăng xuất?</p>
                         <form method="post">
                             <input type="hidden" asp-for="LogoutVm.LogoutId" />
                             <fieldset>
                                 <div class="form-group">
-                                    <button class="btn btn-primary">Yes</button>
+                                    <button class="btn btn-primary">Có</button>
                                 </div>
                             </fieldset>
                         </form>
@@ -55,12 +55,12 @@
             }
             @if (Model.LoggedOutVm != null)
             {
-                <p>You are now logged out</p>
+                <p>Bạn đã được đăng xuất</p>
                 @if (Model.LoggedOutVm.PostLogoutRedirectUri != null)
                 {
                     <div>
-                        Click <a class="PostLogoutRedirectUri" href="@Model.LoggedOutVm.PostLogoutRedirectUri">here</a> to return to the
-                        <span>@Model.LoggedOutVm.ClientName</span> application.
+                        Nhấn <a class="PostLogoutRedirectUri" href="@Model.LoggedOutVm.PostLogoutRedirectUri">vào đây</a> để quay về ứng dụng
+                        <span>@Model.LoggedOutVm.ClientName</span>.
                     </div>
                 }
 
@@ -73,7 +73,7 @@
     </div>
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2019 - MyShop.Backend - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; @DateTime.Now.Year - TEDU - <a asp-area="" asp-controller="Home" asp-action="Privacy">Chính sách</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
