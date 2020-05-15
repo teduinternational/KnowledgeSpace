@@ -38,6 +38,10 @@ namespace KnowledgeSpace.WebPortal.Services
             }
             var response = await client.GetAsync(url);
             var body = await response.Content.ReadAsStringAsync();
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new Exception(body);
+            }
             var data = (List<T>)JsonConvert.DeserializeObject(body, typeof(List<T>));
             return data;
         }
@@ -53,6 +57,10 @@ namespace KnowledgeSpace.WebPortal.Services
             }
             var response = await client.GetAsync(url);
             var body = await response.Content.ReadAsStringAsync();
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new Exception(body);
+            }
             var data = JsonConvert.DeserializeObject<T>(body);
             return data;
         }
@@ -76,11 +84,11 @@ namespace KnowledgeSpace.WebPortal.Services
             var response = await client.PostAsync(url, httpContent);
             var body = await response.Content.ReadAsStringAsync();
 
-            if (response.IsSuccessStatusCode)
+            if (!response.IsSuccessStatusCode)
             {
-                return JsonConvert.DeserializeObject<TResponse>(body);
+                throw new Exception(body);
             }
-            throw new Exception(body);
+            return JsonConvert.DeserializeObject<TResponse>(body);
         }
 
         public async Task<bool> PutAsync<TRequest, TResponse>(string url, TRequest requestContent, bool requiredLogin = true)
@@ -102,10 +110,9 @@ namespace KnowledgeSpace.WebPortal.Services
             var response = await client.PutAsync(url, httpContent);
             var body = await response.Content.ReadAsStringAsync();
 
-            if (response.IsSuccessStatusCode)
-                return true;
-
-            throw new Exception(body);
+            if (!response.IsSuccessStatusCode)
+                throw new Exception(body);
+            return true;
         }
     }
 }
