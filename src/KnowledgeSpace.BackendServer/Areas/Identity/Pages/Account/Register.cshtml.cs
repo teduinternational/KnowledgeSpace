@@ -46,12 +46,12 @@ namespace KnowledgeSpace.BackendServer.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
+            [Required(ErrorMessage = "{0} bắt buộc")]
             [EmailAddress]
             [Display(Name = "Tài khoản")]
             public string Email { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "{0} bắt buộc")]
             [StringLength(100, ErrorMessage = "{0} phải có ít nhất {2} và nhiều nhất {1} ký tự.", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "Mật khẩu")]
