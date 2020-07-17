@@ -9,7 +9,7 @@ const AppLayout = (props: any) => (
     <div id="layoutSidenav">
       <SideBar></SideBar>
       <div id="layoutSidenav_content">
-        {props.chidren}
+        {props.children}
       </div>
     </div>
   </>

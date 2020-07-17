@@ -1,6 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
+import userManager from "../helpers/userManager";
 
 const LoginPage = (): JSX.Element => {
+  useEffect(() => {
+    document.getElementById("body")?.setAttribute("class","bg-primary");
+  });
+  const login = () => {
+    // pass the current path to redirect to the correct page after successfull login
+    userManager.signinRedirect();
+  };
+
   return (
     <div id="layoutAuthentication">
       <div id="layoutAuthentication_content">
@@ -50,7 +59,7 @@ const LoginPage = (): JSX.Element => {
                         <a className="small" href="password.html">
                           Forgot Password?
                         </a>
-                        <a className="btn btn-primary" href="index.html">
+                        <a className="btn btn-primary" onClick={()=>login()}>
                           Login
                         </a>
                       </div>

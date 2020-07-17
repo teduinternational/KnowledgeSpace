@@ -1,32 +1,20 @@
-import React from "react";
-import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
-import AppLayout from "./core/components/AppLayout";
-import HomePage from "./modules/dashboard/pages/HomePage";
+import React, { FunctionComponent, ReactElement } from "react";
+import { ConnectedRouter } from "connected-react-router";
+import { Provider } from "react-redux";
+import Routes from "./core/components/Routes";
+import { createHashHistory } from "history";
+import configureStore from "./core/configureStore";
+import { hot } from "react-hot-loader/root";
 
-const App = (props: any): JSX.Element => {
-  return (
-    <BrowserRouter>
-      <Switch>
-        <RouteWrapper
-          path="/"
-          component={HomePage}
-          layout={AppLayout}
-        />
-      </Switch>
-    </BrowserRouter>
-  );
-};
-function RouteWrapper({ component: Component, layout: Layout, ...rest }: any) {
-  return (
-    <Route
-      {...rest}
-      render={(props: any) => (
-        <Layout {...props}>
-          <Component {...props} />
-        </Layout>
-      )}
-    />
-  );
-}
+const history = createHashHistory();
+const store = configureStore(history);
 
-export default App;
+const App: FunctionComponent<{}> = (): ReactElement => (
+  <Provider store={store}>
+    <ConnectedRouter history={history}>
+      <Routes />
+    </ConnectedRouter>
+  </Provider>
+);
+
+export default hot(App);
