@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import userManager from "../helpers/userManager";
+import userManager from "../userManager";
 
 const LoginPage = (): JSX.Element => {
   useEffect(() => {

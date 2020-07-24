@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import userManager from "../helpers/userManager";
+import userManager from "../userManager";
 import { Dispatch } from "redux";
 import { User } from "oidc-client";
 import {push} from 'connected-react-router';

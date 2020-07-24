@@ -1,15 +1,20 @@
 import React from "react";
-import LoginPage from "../pages/LoginPage";
-import userManager from "../helpers/userManager";
+import userManager from "../userManager";
 
 const Header = (): JSX.Element => {
   const toggleSideBar = () => {
     document.getElementById("body")?.classList.toggle("sb-sidenav-toggled");
   };
+  const logout = (event: any) => {
+    event.preventDefault();
+    userManager.signoutRedirect();
+    userManager.removeUser();
+  };
+
   return (
     <nav className="sb-topnav navbar navbar-expand navbar-dark bg-dark">
       <a className="navbar-brand" href="index.html">
-        Start Bootstrap
+        Knowledge Space
       </a>
       <button
         className="btn btn-link btn-sm order-1 order-lg-0"
@@ -23,7 +28,7 @@ const Header = (): JSX.Element => {
           <input
             className="form-control"
             type="text"
-            placeholder="Search for..."
+            placeholder="Tìm kiếm..."
             aria-label="Search"
             aria-describedby="basic-addon2"
           />
@@ -40,7 +45,7 @@ const Header = (): JSX.Element => {
           <a
             className="nav-link dropdown-toggle"
             id="userDropdown"
-            href="#"
+            href="# "
             role="button"
             data-toggle="dropdown"
             aria-haspopup="true"
@@ -52,15 +57,15 @@ const Header = (): JSX.Element => {
             className="dropdown-menu dropdown-menu-right"
             aria-labelledby="userDropdown"
           >
-            <a className="dropdown-item" href="#">
+            <a className="dropdown-item" href="# ">
               Settings
             </a>
-            <a className="dropdown-item" href="#">
+            <a className="dropdown-item" href="# ">
               Activity Log
             </a>
             <div className="dropdown-divider"></div>
-            <a className="dropdown-item" href="login.html">
-              Logout
+            <a className="dropdown-item" href="# " onClick={(event) => logout(event)}>
+              Đăng xuất
             </a>
           </div>
         </li>

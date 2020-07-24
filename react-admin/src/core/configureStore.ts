@@ -6,7 +6,7 @@ import {routerMiddleware} from 'connected-react-router';
 import {History} from 'history';
 
 import createRootReducer from './store';
-import userManager from './helpers/userManager';
+import userManager from './userManager';
 
 const configureStore = (history: History) => {
   userManager.events.addSilentRenewError(function(error) {
